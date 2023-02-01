@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'difficulty.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -121,44 +123,8 @@ class _TaskState extends State<Task> {
                                     fontSize: 24,
                                     overflow: TextOverflow.ellipsis),
                               )),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.star,
-                                size: 15,
-                                color: (widget.dificuldade >= 1)
-                                    ? Colors.green
-                                    : Colors.green[100],
-                              ),
-                              Icon(
-                                Icons.star,
-                                size: 15,
-                                color: (widget.dificuldade >= 2)
-                                    ? Colors.green
-                                    : Colors.green[100],
-                              ),
-                              Icon(
-                                Icons.star,
-                                size: 15,
-                                color: (widget.dificuldade >= 3)
-                                    ? Colors.green
-                                    : Colors.green[100],
-                              ),
-                              Icon(
-                                Icons.star,
-                                size: 15,
-                                color: (widget.dificuldade >= 4)
-                                    ? Colors.green
-                                    : Colors.green[100],
-                              ),
-                              Icon(
-                                Icons.star,
-                                size: 15,
-                                color: (widget.dificuldade >= 5)
-                                    ? Colors.green
-                                    : Colors.green[100],
-                              ),
-                            ],
+                          Difficulty(
+                            dificultyLevel: widget.dificuldade,
                           )
                         ],
                       ),
