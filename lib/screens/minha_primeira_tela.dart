@@ -88,7 +88,7 @@ class MyFirstWidget extends StatelessWidget {
                         color: Colors.green,
                         height: 30,
                         width: 300,
-                        child: Text(
+                        child: const Text(
                           'Diamante Verde',
                           style: TextStyle(color: Colors.black, fontSize: 28),
                           textAlign: TextAlign.center,
@@ -96,9 +96,9 @@ class MyFirstWidget extends StatelessWidget {
                       ),
                       ElevatedButton(
                           onPressed: () {
-                            print('Você apertou o botão');
+                            //print('Você apertou o botão');
                           },
-                          child: Text('Aperte o botão'))
+                          child: const Text('Aperte o botão'))
                     ],
                   ),
                 ),
@@ -142,7 +142,7 @@ class MyFirstWidget extends StatelessWidget {
                   color: Colors.green,
                   height: 30,
                   width: 300,
-                  child: Text(
+                  child: const Text(
                     'Diamante Verde',
                     style: TextStyle(color: Colors.black, fontSize: 28),
                     textAlign: TextAlign.center,
@@ -150,9 +150,9 @@ class MyFirstWidget extends StatelessWidget {
                 ),
                 ElevatedButton(
                     onPressed: () {
-                      print('Você apertou o botão');
+                      //print('Você apertou o botão');
                     },
-                    child: Text('Aperte o botão'))
+                    child: const Text('Aperte o botão'))
               ],
             ),
           ],
