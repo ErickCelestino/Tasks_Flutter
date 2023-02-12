@@ -6,14 +6,21 @@ class Task extends StatefulWidget {
   final String foto;
   final String nome;
   final int dificuldade;
-  const Task(this.nome, this.foto, this.dificuldade, {Key? key})
-      : super(key: key);
+
+  Task(this.nome, this.foto, this.dificuldade, {Key? key}) : super(key: key);
+  int nivel = 0;
   @override
   State<Task> createState() => _TaskState();
 }
 
 class _TaskState extends State<Task> {
-  int nivel = 0;
+  bool assetOrNetwork() {
+    if (widget.foto.contains('http')) {
+      return false;
+    }
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,30 +32,37 @@ class _TaskState extends State<Task> {
                 borderRadius: BorderRadius.circular(4), color: Colors.green),
             height: 140,
           ),
-          Column(children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                color: Colors.white,
-              ),
-              height: 100,
-              child: Row(
+          Column(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  color: Colors.white,
+                ),
+                height: 100,
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
-                          color: Colors.black26,
-                        ),
-                        width: 72,
-                        height: 100,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(4),
-                          child: Image.asset(
-                            widget.foto,
-                            fit: BoxFit.cover,
-                          ),
-                        )),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        color: Colors.black26,
+                      ),
+                      width: 72,
+                      height: 100,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(4),
+                        child: assetOrNetwork()
+                            ? Image.asset(
+                                widget.foto,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.network(
+                                widget.foto,
+                                fit: BoxFit.cover,
+                              ),
+                      ),
+                    ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,48 +81,54 @@ class _TaskState extends State<Task> {
                       ],
                     ),
                     SizedBox(
-                        height: 52,
-                        width: 52,
-                        child: ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                nivel++;
-                              });
-                            },
-                            child: Column(
-                              children: const [
-                                Icon(Icons.arrow_drop_up),
-                                Text(
-                                  'UP',
-                                  style: TextStyle(fontSize: 12),
-                                )
-                              ],
-                            )))
-                  ]),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
+                      height: 52,
+                      width: 52,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            widget.nivel++;
+                          });
+                        },
+                        child: Column(
+                          children: const [
+                            Icon(Icons.arrow_drop_up),
+                            Text(
+                              'UP',
+                              style: TextStyle(fontSize: 12),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
                     padding: const EdgeInsets.all(8),
                     child: SizedBox(
                       width: 200,
                       child: LinearProgressIndicator(
                         color: Colors.white,
                         value: (widget.dificuldade > 0)
-                            ? (nivel / widget.dificuldade) / 10
+                            ? (widget.nivel / widget.dificuldade) / 10
                             : 1,
                       ),
-                    )),
-                Padding(
+                    ),
+                  ),
+                  Padding(
                     padding: const EdgeInsets.all(12),
                     child: Text(
-                      'Nivel: $nivel',
+                      'nivel: $widget.nivel',
                       style: const TextStyle(color: Colors.white, fontSize: 16),
-                    ))
-              ],
-            )
-          ])
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
         ],
       ),
     );
