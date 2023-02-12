@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:futter_projeto/components/task.dart';
+import 'package:futter_projeto/data/task_dao.dart';
 import 'package:futter_projeto/data/task_inherited.dart';
 
 class FormScreen extends StatefulWidget {
@@ -141,11 +143,12 @@ class _FormScreenState extends State<FormScreen> {
                       if (_formKey.currentState!.validate()) {
                         // print(nameController.text);
                         // print(int.parse(difficultController.text));
-
-                        TaskInherited.of(widget.taskContext).newTask(
-                          nameController.text,
-                          imageController.text,
-                          int.parse(difficultController.text),
+                        TaskDao().save(
+                          Task(
+                            nameController.text,
+                            imageController.text,
+                            int.parse(difficultController.text),
+                          ),
                         );
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
